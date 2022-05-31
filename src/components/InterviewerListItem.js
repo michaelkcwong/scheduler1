@@ -8,15 +8,15 @@ const interviewerClass = classNames("interviewers__item", {
 });
 
 return (
-  <li className={interviewerClass}>
-onClick={() => props.setInterviewer(props.id)}
+  <li className={interviewerClass}
+onClick={() => props.setInterviewer(props.id)}>
 <img
 key={props.id}
 className="interviewers__item-image"
-src="https://i.imgur.com/LpaY82x.png"
-alt="Sylvia Palmer"
+src={props.avatar}
+alt={props.name}
 />
-Sylvia Palmer
+
 
   </li>
 )
