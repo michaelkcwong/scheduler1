@@ -5,18 +5,11 @@ import Show from "components/Appointment/Show"
 import Empty from "components/Appointment/Empty"
 
 export default function Appointment(props) {
-const formatTime = () => {
-  if(props.time) {
-    return `Appointment at ${props.time}`
-  }
-  if(!props.time) {
-    return `No Appointments`
-  }
-};
 
 return (
   <article className="appointment">
-    {formatTime()}
+    <Header time={props.time}/>
+    {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer}/> : <Empty />}
   </article>);
 }
 
