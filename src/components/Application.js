@@ -46,12 +46,6 @@ import { getAppointmentsForDay } from "helpers/selectors";
 };
 */
 
-const dailyAppointments = [];
-
-const appointmentsArray = dailyAppointments.map((appointment) => {
-  return <Appointment key={appointment.id} {...appointment} />;
-});
-
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
@@ -76,7 +70,15 @@ export default function Application(props) {
     );
   }, []);
 
-
+  const dailyAppointments = getAppointmentsForDay(state, state.day)
+  const appointmentsArray = dailyAppointments.map((appointment) => {
+    return (
+      <Appointment
+      key={appointment.id}
+      {...appointment}
+      />
+    )
+  });
 
   return (
     <main className="layout">
