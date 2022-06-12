@@ -7,7 +7,7 @@ export default function useVisualMode(initial) {
   const transition = (second, replace = false) => {
     if (!replace) {
       setHistory((prev) => {
-        const previousChange = prev;
+        const previousChange = [...prev];
         previousChange.push(second);
         setHistory(previousChange);
       });
