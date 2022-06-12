@@ -39,15 +39,13 @@ function cancelInterview(id) {
     ...state.appointments,
     [id]: appointment,
   };
-  return axios.delete(`/api/appointments/${id}`).then((res) => {
-    console.log(res);
-    setState((prev) => {
-      return { ...prev, appointments };
-    });
+  return axios.delete(`/api/appointments/${id}`, appointment).then(() => {
+    const days = updateSpots(-1);
+    setState({ ...state, appointments, days });
   });
 }
 
-function bookInterview(id, interview) {
+function bookInterview(id, interview, mode) {
   const appointment = {
     ...state.appointments[id],
     interview: { ...interview },
@@ -56,14 +54,30 @@ function bookInterview(id, interview) {
     ...state.appointments,
     [id]: appointment,
   };
-  return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
-    console.log(res);
-    if (res.status === 204) {
-      setState((prev) => {
-        return { ...prev, appointments };
+  return axios.put(`/api/appointments/${id}`, appointment).then(() => {
+    if (!state.appointments[id].interview) {
+      const days = updateSpots(1);
+      setState({
+        ...state,
+        appointments,
+        days,
+      });
+    } else {
+      setState({
+        ...state,
+        appointments,
       });
     }
   });
+}
+
+function updateSpots(number) {
+  state.days.forEach((day) => {
+    if(day.name === state.day) {
+      day.spots -= number;
+    }
+  });
+  return state.days;
 }
 
 return {
