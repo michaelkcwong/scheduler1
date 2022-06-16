@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, fireEvent } from "@testing-library/react";
+import { prettyDOM, render, cleanup, fireEvent } from "@testing-library/react";
 
 import Form from "components/Appointment/Form";
 
@@ -62,8 +62,8 @@ describe("Form", () => {
   
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
-    const { getByText, getByPlaceholderText, queryByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} />
+    const { container, getByText, getByPlaceholderText, queryByText } = render(
+      <Form interviewers={interviewers} interviewer={1} onSave={onSave} />
     );
   
     fireEvent.click(getByText("Save"));
@@ -79,8 +79,9 @@ describe("Form", () => {
   
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
   
+    console.log(prettyDOM(container.firstChild))
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
   });
 
   it("calls onCancel and resets the input field", () => {
