@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, queryByAltText } from "@testing-library/react";
 
@@ -90,4 +91,8 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
       queryByText(day, "Monday")
     );
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  });
+
+  it("shows the save error when failing to save an appointment", () => {
+    axios.put.mockRejectedValueOnce();
   });
