@@ -43,6 +43,8 @@ it("loads data, books an interview and reduces the spots remaining for Monday by
 
   fireEvent.click(getByText(appointment, "Save"));
   expect(getByText(appointment, "SAVING")).toBeInTheDocument();
+  await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+  
 
   console.log(prettyDOM(appointment));
 });
