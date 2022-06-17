@@ -27,7 +27,7 @@ Check that the DayListItem with the text "Monday" also has the text "no spots re
 */
 
 it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
-  const { container, debug } = render(<Application />);
+  const { container} = render(<Application />);
 
   await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -49,8 +49,4 @@ it("loads data, books an interview and reduces the spots remaining for Monday by
   );
   expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   
-  console.log(prettyDOM(day));
-  
-
-  console.log(prettyDOM(appointment));
 });
