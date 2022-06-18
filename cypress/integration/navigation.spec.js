@@ -17,4 +17,3 @@ describe("Navigation", () => {
       .should("have.class", "day-list__item--selected")
   });
 });
-
