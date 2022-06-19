@@ -28,12 +28,12 @@ export function getInterview(state, interview) {
 export function getInterviewersForDay(state, day) {
   const filteredInterviews = [];
   state.days.forEach((obj) => {
-    if(obj.name === day) {
+    if (obj.name === day) {
       const interviewerList = obj.interviewers || [];
       interviewerList.forEach((i) => {
         filteredInterviews.push(state.interviewers[i]);
-      })
+      });
     }
-  })
+  });
   return filteredInterviews;
 }
